@@ -13,8 +13,8 @@ jobs:
     - name: Setup Anaconda
       uses: fdiblen/anaconda-action@0.1.7
     - run: |
-        apt-get update
-        apt-get install osmium-tool osmosis
+        sudo apt-get update
+        sudo apt-get install osmium-tool osmosis
     - run: |
         conda create -n gdal-user python=3.10 geojson=2.5 gdal=3.6 requests=2.28 shapely=1.8 bs4=4.11 lxml=4.9 matplotlib=3.4.3 pip --channel conda-forge --override-channels
         conda activate gdal-user
