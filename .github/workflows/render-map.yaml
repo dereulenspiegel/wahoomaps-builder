@@ -1,0 +1,21 @@
+name: Render Wahoo maps
+run-name: Rendering Wahoo maps
+on: [push] # TODO run as cron
+jobs:
+  render-maps:
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v3
+      with:
+        distribution: oracle
+        java-version: "19"
+    - name: Setup Anaconda
+      uses: fdiblen/anaconda-action@0.1.7
+    - run: |
+        apt-get update
+        apt-get install osmium-tool osmosis
+    - run: |
+        conda create -n gdal-user python=3.10 geojson=2.5 gdal=3.6 requests=2.28 shapely=1.8 bs4=4.11 lxml=4.9 matplotlib=3.4.3 pip --channel conda-forge --override-channels
+        conda activate gdal-user
+        pip install wahoomc
