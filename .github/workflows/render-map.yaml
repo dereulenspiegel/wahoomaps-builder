@@ -11,7 +11,7 @@ jobs:
         distribution: oracle
         java-version: "19"
     - name: Setup Anaconda
-      uses: fdiblen/anaconda-action@0.1.7
+      uses: s-weigand/setup-conda@v1
     - run: |
         sudo apt-get update
         sudo apt-get install osmium-tool osmosis
