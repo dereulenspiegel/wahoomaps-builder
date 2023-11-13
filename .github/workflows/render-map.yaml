@@ -24,6 +24,7 @@ jobs:
         conda info
     - name: Install wahoomc and build map
       run: |
+        conda init
         conda activate gdal-user
         pip install wahoomc
         python -m wahoomc cli -co germany
