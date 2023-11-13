@@ -12,7 +12,7 @@ jobs:
         java-version: "19"
     - run: |
         sudo apt-get update
-        sudo apt-get install osmium-tool osmosis
+        sudo apt-get install osmium-tool osmosis python3-tk
     - name: Setup Anaconda
       uses: conda-incubator/setup-miniconda@v2
       with: 
