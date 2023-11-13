@@ -19,6 +19,7 @@ jobs:
         activate-environment: gdal-user
         environment-file: conda-environment.yaml
         auto-activate-base: false
+    - run: conda info
     - name: Install wahoomc and build map
       run: |
         pip install wahoomc
