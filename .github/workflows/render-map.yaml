@@ -5,6 +5,9 @@ jobs:
   render-maps:
     runs-on: "ubuntu-latest"
     steps:
+    - name: free space on runner
+      run: |
+        sudo rm -rf /usr/share/swift /usr/share/dotnet
     - uses: actions/checkout@v2
     - uses: actions/setup-java@v3
       with:
@@ -19,9 +22,6 @@ jobs:
         activate-environment: gdal-user
         environment-file: conda-environment.yaml
         auto-activate-base: false
-    - run: |
-        conda env list
-        conda info
     - name: Install wahoomc and build map
       run: |
         conda init
