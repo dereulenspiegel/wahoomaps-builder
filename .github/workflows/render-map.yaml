@@ -10,17 +10,16 @@ jobs:
       with:
         distribution: oracle
         java-version: "19"
-    - name: Setup Anaconda
-      uses: s-weigand/setup-conda@v1
     - run: |
         sudo apt-get update
         sudo apt-get install osmium-tool osmosis
-    - name: Setup conda environment
-      run: |
-        conda init
-        conda create -y -n gdal-user python=3.10 geojson=2.5 gdal=3.6 requests=2.28 shapely=1.8 bs4=4.11 lxml=4.9 matplotlib=3.4.3 pip --channel conda-forge --override-channels
+    - name: Setup Anaconda
+      uses: s-weigand/setup-conda@v1
+      with: 
+        activate-environment: gdal-user
+        environment-file: conda-environment.yaml
+        auto-activate-base: false
     - name: Install wahoomc and build map
       run: |
-        conda activate gdal-user
         pip install wahoomc
         python -m wahoomc cli -co germany
