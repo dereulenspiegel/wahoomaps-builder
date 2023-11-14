@@ -30,3 +30,5 @@ jobs:
         conda activate gdal-user
         pip install wahoomc
         python -m wahoomc cli -co germany
+    - run: |
+        find ~/wahooMapsCreatorData -type d
