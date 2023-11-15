@@ -32,5 +32,4 @@ jobs:
         python -m wahoomc cli -co germany
     - run: |
         find ~/wahooMapsCreatorData -type d
-        ls -lah ~/wahooMapsCreatorData
-        ls -lah ~/wahooMapsCreatorData/_download/maps
+        ls -lah ~/wahooMapsCreatorData/germany
