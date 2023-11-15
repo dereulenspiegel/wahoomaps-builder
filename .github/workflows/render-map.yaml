@@ -33,3 +33,4 @@ jobs:
     - run: |
         find ~/wahooMapsCreatorData -type d
         ls -lah ~/wahooMapsCreatorData
+        ls -lah ~/wahooMapsCreatorData/_download/maps
