@@ -36,11 +36,18 @@ jobs:
         source /home/runner/.bashrc
         conda activate gdal-user
         pip install wahoomc
+        echo "Rendering maps for country ${INPUT_COUNTRY}"
         python -m wahoomc cli -co ${INPUT_COUNTRY}
+      shell: bash
+      env:
+        INPUT_COUNTRY: ${{ inputs.country }}
     - name: Archive map data
       run: |
         tar cvzf ${INPUT_COUNTRY}.tar.gz ~/wahooMapsCreatorData/${INPUT_COUNTRY}
+      shell: bash
+      env:
+        INPUT_COUNTRY: ${{ inputs.country }}
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.event.inputs.country }}.tar.gz
-        path: ${{ github.event.inputs.country }}.tar.gz
+        name: ${{ inputs.country }}.tar.gz
+        path: ${{ inputs.country }}.tar.gz
