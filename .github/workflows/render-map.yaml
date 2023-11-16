@@ -1,11 +1,12 @@
 name: Render Wahoo maps
 run-name: Rendering Wahoo maps
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       country:
         description: "The country to render map data for"
         required: true
+        type: string
         default: germany
 jobs:
   render-maps:
