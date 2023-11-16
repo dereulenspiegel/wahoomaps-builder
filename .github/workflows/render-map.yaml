@@ -1,6 +1,12 @@
 name: Render Wahoo maps
 run-name: Rendering Wahoo maps
-on: [push] # TODO run as cron
+on:
+  workflow_dispatch:
+    inputs:
+      country:
+        description: "The country to render map data for"
+        required: true
+        default: germany
 jobs:
   render-maps:
     runs-on: "ubuntu-latest"
@@ -29,7 +35,11 @@ jobs:
         source /home/runner/.bashrc
         conda activate gdal-user
         pip install wahoomc
-        python -m wahoomc cli -co germany
-    - run: |
-        find ~/wahooMapsCreatorData -type d
-        ls -lah ~/wahooMapsCreatorData/germany
+        python -m wahoomc cli -co ${INPUT_COUNTRY}
+    - name: Archive map data
+      run: |
+        tar cvzf ${INPUT_COUNTRY}.tar.gz ~/wahooMapsCreatorData/${INPUT_COUNTRY}
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ github.event.inputs.country }}.tar.gz
+        path: ${{ github.event.inputs.country }}.tar.gz

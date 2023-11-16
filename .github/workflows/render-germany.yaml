@@ -1,0 +1,10 @@
+name: Render germany
+on:
+  push:
+  schedule:
+  - cron: "0 0 1 * *"
+jobs:
+  render-germany-map:
+    uses: ./.github/workflows/render-map.yaml
+    with:
+      country: germany
