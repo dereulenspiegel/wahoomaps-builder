@@ -30,6 +30,14 @@ jobs:
         activate-environment: gdal-user
         environment-file: conda-environment.yaml
         auto-activate-base: false
+    - name: Restore geodata cache
+      id: geodata-restore
+      uses: actions/cache/restore@v3
+      with:
+        path: |
+          /home/runner/wahooMapsCreatorData/_tiles
+          /home/runner/wahooMapsCreatorData/_download/maps
+        key: ${{ runner.os }}-geodata
     - name: Install wahoomc and build map
       run: |
         conda init
@@ -41,6 +49,13 @@ jobs:
       shell: bash
       env:
         INPUT_COUNTRY: ${{ inputs.country }}
+    - name: Save geodata cache
+      uses: actions/cache/save@v3
+      with:
+        path: |
+          /home/runner/wahooMapsCreatorData/_tiles
+          /home/runner/wahooMapsCreatorData/_download/maps
+        key: ${{ steps.geodata-restore.outputs.cache-primary-key }}
     - name: Archive map data
       run: |
         tar cvzf ${INPUT_COUNTRY}.tar.gz ~/wahooMapsCreatorData/${INPUT_COUNTRY}
